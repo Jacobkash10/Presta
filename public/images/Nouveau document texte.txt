@@ -1,0 +1,17 @@
+{
+                aviss?.slice(0, 3)?.map((item: any) => (
+                    <div className='w-[100%]  rounded-md border' key={item.id}>
+                        <div className='flex justify-between items-center bg-secondary px-4 py-3'>
+                            <Image src={item.src} alt='avis image' className='w-[10%] object-contain' width={0} height={0} sizes='100vw' />
+                            <h5>{item.name}</h5>
+                        </div>
+                        <div className='py-4 p-4'>
+                            <p className='text-sm'>{item.content}</p>
+                        </div>
+                        <div className='flex items-center gap-4 p-4'>
+                            <i><Clock7 size={20} /></i>
+                            <h6 className='text-sm'>Il y'a 3 jours</h6>
+                        </div>
+                    </div>
+                ))
+            }
