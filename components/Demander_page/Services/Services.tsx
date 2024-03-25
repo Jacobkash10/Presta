@@ -13,19 +13,19 @@ const Services = () => {
             <Input type="text" className='bg-transparent w-[100%] border-none text-primary transition-all .3s' placeholder='Rechercher un service' />
         </div>
         <div className="grid grid-cols-3 grid-rows-2 w-[50%] gap-2 mt-5">
-            <Button variant='secondary' className='py-3 px-5 rounded-ful'>
+            <Button variant='secondary' className='py-3 px-5 rounded-ful hover:bg-green-500 transition-all .4s'>
                 Ménage
             </Button>
-            <Button variant='secondary' className='py-3 px-5 rounded-ful'>
+            <Button variant='secondary' className='py-3 px-5 rounded-ful hover:bg-green-500 transition-all .4s'>
                 Réparation d'une télé
             </Button>
-            <Button variant='secondary' className='py-3 px-5 rounded-ful'>
+            <Button variant='secondary' className='py-3 px-5 rounded-ful hover:bg-green-500 transition-all .4s'>
                 Tondre le gazon
             </Button>
-            <Button variant='secondary' className='py-3 px-5 rounded-ful'>
+            <Button variant='secondary' className='py-3 px-5 rounded-ful hover:bg-green-500 transition-all .4s'>
                 Fixer une lampe
             </Button>
-            <Button variant='secondary' className='py-3 px-5 rounded-ful'>
+            <Button variant='secondary' className='py-3 px-5 rounded-ful hover:bg-green-500 transition-all .4s'>
                 Montage d'un meuble
             </Button>
         </div>

@@ -90,7 +90,7 @@ const Inscription = () => {
                         required
                         value={user.name}
                         onChange={e => setUser({ ...user, name: e.target.value })}
-                        placeholder="Votre nom" className='w-[100%]' 
+                        placeholder="Jhon Doe" className='w-[100%] py-6' 
                     />
                 </div>
                 <div className="mt-5">
@@ -103,7 +103,7 @@ const Inscription = () => {
                         required
                         value={user.email}
                         onChange={e => setUser({ ...user, email: e.target.value })}
-                        placeholder="Email" className='w-[100%]' 
+                        placeholder="example@gmail.com" className='w-[100%] py-6' 
                     />
                 </div>
                 <div className="mt-5">
@@ -116,16 +116,16 @@ const Inscription = () => {
                         required
                         value={user.password}
                         onChange={e => setUser({ ...user, password: e.target.value })}
-                        className='w-[100%]' 
+                        className='w-[100%] py-6' 
                     />
                 </div>
                 <div className='mt-5'>
-                    {error && <p className="py-6 text-lg">{error}</p>}
-                    <Button variant='default' type='submit' className='py-7 w-[100%] bg-green-600 text-white hover:bg-green-400'>
-                        {loading ? "Processing" : " S'inscrire"}
+                    {error && <p className="py-5 text-lg">{error}</p>}
+                    <Button variant='default' type='submit' className='py-6 w-[100%] bg-green-600 text-white hover:bg-green-400'>
+                        {loading ? "En cours ..." : " S'inscrire"}
                     </Button>
                 </div>
-                <div className="mt-5 text-sm">
+                <div className="mt-5 text-base">
                     <h5>Vous avez déjà un compte ?</h5>
                     <Link className='text-green-500 hover:underline max-w-fit' href='/Connexion'>Connectez-vous</Link>
                 </div>

@@ -7,7 +7,7 @@ const How = () => {
   return (
     <div className="mt-32 w-[100%]">
         <h3 className='text-xl sm:text-2xl lg:text-3xl text-center font-bold'>Comment ça <span className='text-green-600'>marche ?</span></h3>
-        <div className='mt-10 block sm:grid md:grid-cols-2 lg:grid-cols-3 gap-2'>
+        <div className='mt-10 block sm:grid md:grid-cols-2 lg:grid-cols-3 gap-4'>
             <div className="w-[100%] mt-6 md:mt-0 flex items-center justify-center flex-col rounded-lg">
                 <i className=' mb-5 bg-green-600 text-white rounded-full p-4 xs:p-5'><SquareStack size={50} /></i>
                 <h5 className='text-lg font-semibold mb-5'>Demandez un service</h5>

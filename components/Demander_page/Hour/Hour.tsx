@@ -13,7 +13,7 @@ const Hour = () => {
         <h3 className='mb-3 font-bold text-center text-2xl max-w-md'>De combien d’heures de service avez-vous besoin ?</h3>
         <div className="grid grid-cols-3 gap-2 w-[45%] mt-6">
             <div className="">
-                <div className="border-[1px] border-slate-300 flex flex-col items-center justify-center p-12 rounded-md hover:border-green-300 cursor-pointer transition-all .3s">
+                <div className="border-[1px] border-slate-300 flex flex-col items-center justify-center p-12 rounded-md hover:bg-green-500 cursor-pointer transition-all .3s">
                     <i><Clock2 /></i>
                     <h5>2h00</h5>
                 </div>
@@ -23,7 +23,7 @@ const Hour = () => {
                 </div>
             </div>
             <div className="">
-                <div className="border-[1px] border-slate-300 flex flex-col items-center justify-center p-12 rounded-md hover:border-green-300 cursor-pointer transition-all .3s">
+                <div className="border-[1px] border-slate-300 flex flex-col items-center justify-center p-12 rounded-md hover:bg-green-500 cursor-pointer transition-all .3s">
                     <i><Clock6 /></i>
                     <h5>4h00</h5>
                 </div>
@@ -33,7 +33,7 @@ const Hour = () => {
                 </div>
             </div>
             <div className="">
-                <div className="border-[1px] border-slate-300 flex flex-col items-center justify-center p-12 rounded-md hover:border-green-300 cursor-pointer transition-all .3s">
+                <div className="border-[1px] border-slate-300 flex flex-col items-center justify-center p-12 rounded-md hover:bg-green-500 cursor-pointer transition-all .3s">
                     <i><Clock9 /></i>
                     <h5>6h00</h5>
                 </div>

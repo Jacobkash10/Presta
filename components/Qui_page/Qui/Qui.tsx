@@ -1,9 +1,9 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import services from '@/app/data/allServices'
+import services from '@/app/(site)/data/allServices'
 import Image from 'next/image'
-import Lorem from '@/app/data/Lorem'
+import Lorem from '@/app/(site)/data/Lorem'
 
 const Qui = () => {
 

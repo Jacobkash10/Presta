@@ -1,10 +1,7 @@
-"use client"
-
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -12,16 +9,20 @@ import {
 import { Input } from "@/components/ui/input"
 import { ArrowBigRight, Search } from "lucide-react"
 import Link from "next/link"
-import { useEffect, useState } from "react"
-import services from '@/app/(site)/data/services'
 
-export function SearchHome() {
+async function fetchCategories() {
+  const res = await fetch("http://localhost:3000/api/categories", {
+    next: {
+      revalidate: 10,
+    }
+  })
+  const data = await res.json();
+  return data.categories
+}
 
-      const [service, setService] = useState(services)
+export async function SearchHome() {
 
-      useEffect(() => {
-        setService(services)
-      }, [])
+  const services = await fetchCategories()
 
   return (
     <Dialog>
@@ -44,11 +45,11 @@ export function SearchHome() {
           <DialogDescription className="grid grid-cols-1 gap-3">
             <p className="mb-2 text-xs">Nos services</p>
             {
-                  service.map((item: any) => (
-                        <div className="py-3 px-2 hover:bg-[#aaa49762] bg-secondary transition-none .3s flex items-center gap-3" key={item.id}>
+                  services?.slice(0, 6)?.map((item: any) => (
+                        <div className="py-2 px-2 hover:bg-[#aaa49762] bg-secondary transition-none .3s flex items-center gap-3" key={item.id}>
                               <i><ArrowBigRight className="text-primary" /></i>
-                              <Link className="text-primary" href={"/UnService"}>
-                                    {item.name}
+                              <Link className="text-primary w-full" href={"/UnService"}>
+                                    {item.name_cate}
                               </Link>
                         </div>
                   ))

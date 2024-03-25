@@ -11,46 +11,46 @@ const Hour_picker = () => {
             09:00
           </Button>
           <Button variant='default' className='py-3 px-5 rounded-full bg-green-600 text-white hover:bg-orange-400'>
-            09:00
+            09:30
           </Button>
           <Button variant='default' className='py-3 px-5 rounded-full bg-green-600 text-white hover:bg-orange-400'>
-            09:00
+            10:00
           </Button>
           <Button variant='default' className='py-3 px-5 rounded-full bg-green-600 text-white hover:bg-orange-400'>
-            09:00
+            10:30
           </Button>
           <Button variant='default' className='py-3 px-5 rounded-full bg-green-600 text-white hover:bg-orange-400'>
-            09:00
+            11:00
           </Button>
           <Button variant='default' className='py-3 px-5 rounded-full bg-green-600 text-white hover:bg-orange-400'>
-            09:00
+            11:30
           </Button>
           <Button variant='default' className='py-3 px-5 rounded-full bg-green-600 text-white hover:bg-orange-400'>
-            09:00
+            12:00
           </Button>
           <Button variant='default' className='py-3 px-5 rounded-full bg-green-600 text-white hover:bg-orange-400'>
-            09:00
+            12:30
           </Button>
           <Button variant='default' className='py-3 px-5 rounded-full bg-green-600 text-white hover:bg-orange-400'>
-            09:00
+            13:00
           </Button>
           <Button variant='default' className='py-3 px-5 rounded-full bg-green-600 text-white hover:bg-orange-400'>
-            09:00
+            13:30
           </Button>
           <Button variant='default' className='py-3 px-5 rounded-full bg-green-600 text-white hover:bg-orange-400'>
-            09:00
+            14:00
           </Button>
           <Button variant='default' className='py-3 px-5 rounded-full bg-green-600 text-white hover:bg-orange-400'>
-            09:00
+            14:30
           </Button>
           <Button variant='default' className='py-3 px-5 rounded-full bg-green-600 text-white hover:bg-orange-400'>
-            09:00
+            15:00
           </Button>
           <Button variant='default' className='py-3 px-5 rounded-full bg-green-600 text-white hover:bg-orange-400'>
-            09:00
+            15:30
           </Button>
           <Button variant='default' className='py-3 px-5 rounded-full bg-green-600 text-white hover:bg-orange-400'>
-            09:00
+            16:00
           </Button>
         </div>
     </div>

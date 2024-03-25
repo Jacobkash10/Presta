@@ -20,7 +20,7 @@ const Banner = () => {
                 <Image src='/images/service.png' width={0} height={0} sizes='100vw' alt='image service' className='w-[100%] h-[100%] object-contain' />
             </div>
             <div className='flex flex-col justify-center items-center'>
-                <h1 className='text-2xl sm:text-[2rem] lg:text-5xl max-w-sm md:max-w-3xl nine:max-w-lg lg:max-w-3xl text-center mb-4 font-bold'>Réservez tous <span className='text-green-600'>vos services</span></h1>
+                <h1 className='text-2xl sm:text-[2rem] lg:text-5xl max-w-sm md:max-w-3xl nine:max-w-lg lg:max-w-md text-center mb-4 font-bold'>Réservez tous <span className='text-green-600'>vos services</span></h1>
                 <p className='text-sm sm:text-base font-normal mb-4 max-w-xl text-center'>Aménager, Démenager, fixer, bricoler, rénover, réparer... trouvez un prestataire qualifié pour tous vos besoins !</p>
                 <Button variant='default' className='bg-green-600 hover:bg-green-700 text-white py-7'><Link href='/Demander_un_service' className='flex items-center gap-2'>
                     Demander un service <i><CornerUpRight /></i>

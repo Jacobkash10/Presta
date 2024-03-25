@@ -27,7 +27,7 @@ const Connexion = () => {
 
     useEffect(() => {
       if (session?.status === 'authenticated') {
-         router.push('/Profil') 
+         router.push('/Compte/Accueil') 
       }
   })
 
@@ -57,7 +57,7 @@ const Connexion = () => {
       }
 
       setError("");
-      router.push("/Profil");
+      router.push("/Compte/Accueil");
       toast({
         title: "Success",
         description: "Connecté avec succès!",
@@ -98,7 +98,7 @@ const Connexion = () => {
                         required
                         value={data.email}
                         onChange={e => setData({ ...data, email: e.target.value })}
-                        placeholder="exemple@gmail.com" className='w-[100%]' 
+                        placeholder="exemple@gmail.com" className='w-[100%] py-6' 
                     />
                 </div>
                 <div className="mt-5">
@@ -111,20 +111,23 @@ const Connexion = () => {
                         required
                         value={data.password}
                         onChange={e => setData({ ...data, password: e.target.value })} 
-                    className='w-[100%]' />
+                        className='w-[100%] py-6'/>
                 </div>
                 <div className='mt-5'>
-                    <Button variant='default' type='submit' className='py-7 w-[100%] bg-green-600 text-white hover:bg-green-700'>Connexion</Button>
+                    {error && <p className="py-5 text-lg">{error}</p>}
+                    <Button variant='default' type='submit' className='py-6 w-[100%] bg-green-600 text-white hover:bg-green-700'>
+                        {loading ? "En cours ..." : " Connexion"}
+                    </Button>
                 </div>
-            </form>
-            <div className="mt-5 text-sm">
-                <h5>Si vous n'avez pas de compte</h5>
-                <Link className='text-green-500 hover:underline max-w-fit' href='/Inscription'>Enregistrez-vous</Link>
-            </div>
-            <h5 className='mt-5 text-center'>Ou</h5>
-            <div className='mt-5'>
-                <Google />
-            </div>     
+                <div className="mt-5 text-base">
+                    <h5>Si vous n'avez pas de compte</h5>
+                    <Link className='text-green-500 hover:underline max-w-fit' href='/Inscription'>Enregistrez-vous</Link>
+                </div>
+              </form> 
+              <h5 className='mt-5 text-center'>Ou</h5>
+              <div className='mt-5'>
+                  <Google />
+              </div>  
         </div>
     </div>
   )

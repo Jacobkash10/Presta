@@ -1,6 +1,6 @@
 import { ArrowLeftRight, Clock8, TrendingUp, UserCheck, Zap } from 'lucide-react'
 import Image from 'next/image'
-import Img from '../../../../public/images/menages.png'
+import Img from '../../../public/images/menages.png'
 import React from 'react'
 
 const Simplifier = () => {

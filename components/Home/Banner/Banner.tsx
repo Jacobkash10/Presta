@@ -6,9 +6,9 @@ import Image from 'next/image';
 
 const Banner = () => {
   return (
-    <div className='flex items-center justify-center flex-col lg:h-[85vh] px-4 py-6 sm:px-0 md:py-8 lg:py-0'>
+    <div className='flex items-center justify-center flex-col lg:h-[85vh] px-4 py-6 sm:px-0 md:py-8 lg:py-0 bg-secondary rounded-lg'>
         <div className='w-[100%] h-[7rem] xs:h-[10rem] rounded-lg'>
-              <Image src='/images/home.png' width={0} height={0} sizes='100vw' alt='image service' className='w-[100%] h-[100%] object-contain' />
+              <Image src='/images/home.png' priority width={0} height={0} sizes='100vw' alt='image service' className='w-[100%] h-[100%] object-contain' />
           </div>
         <h1 className='text-2xl sm:text-[2rem] lg:text-5xl max-w-sm md:max-w-3xl nine:max-w-lg lg:max-w-3xl text-center mb-7 font-bold'>
           Trouvez le prestataire idéal pour <span className='text-green-600'>les services du quotidien</span>
