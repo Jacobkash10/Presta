@@ -3,6 +3,7 @@ import Prestataires from '@/components/Prestataire_page/Prestataires/Prestataire
 import React from 'react'
 
 const page = () => {
+  
   return (
     <div className='pt-20'>
       <Banner />

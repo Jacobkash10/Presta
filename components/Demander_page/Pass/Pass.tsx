@@ -12,7 +12,7 @@ const Pass = () => {
             <h5 className='mb-2 font-bold text-center'>Montage de meubles</h5>
             <h3 className='mb-3 font-bold text-center text-2xl max-w-md'>Et pour finir, choisissez un mot de passe</h3>
             <div className='mt-3 w-[100%] flex flex-col items-center justify-center'>
-                <Input type='password' className='w-[50%] bg-white cursor-pointer hover:bg-slate-200 transition-all .3s' placeholder=''/>
+                <Input type='password' className='w-[40%] py-7 bg-white transition-all .3s' placeholder=''/>
             </div>
             <div className='mt-4 w-[50%] flex items-center justify-between'>
                 <div className='p-[.3rem] bg-green-600 w-[20%] rounded-xl'>

@@ -39,15 +39,15 @@ const UserAccount = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
                 <DropdownMenuCheckboxItem>
-                   <Link href='/Compte/Accueil'>Compte</Link>
+                   <Link className='w-full' href='/Compte/Accueil'>Compte</Link>
                 </DropdownMenuCheckboxItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuCheckboxItem>
-                   <Link href='/Compte/Profil'>Profil</Link>
+                   <Link className='w-full' href={`/Compte/Profil/${session?.user.email}`}>Profil</Link>
                 </DropdownMenuCheckboxItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuCheckboxItem>
-                   <Link href={'/Compte/Mes_demandes'}>Mes demandes</Link>
+                   <Link className='w-full' href={'/Compte/Mes_demandes'}>Mes demandes</Link>
                 </DropdownMenuCheckboxItem> 
                 <DropdownMenuSeparator />
                 <DropdownMenuCheckboxItem>

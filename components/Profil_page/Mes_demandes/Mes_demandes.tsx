@@ -1,22 +1,55 @@
-"use client" 
-
-import { useSession } from 'next-auth/react';
 import React from 'react'
+import Bienvenue from './Bienvenue';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import Action from './Action';
 
-const MesDemandes = () => {
 
-  const { data: session, status } = useSession();
+const MesDemandes = async ({res}: any) => {
+
+  const data = await getServerSession(authOptions);
+  console.log(res)
 
   return (
-    <div className='m-4 h-[100%]'>
-      {
-        session?.user ? (
-          <h2 className='text-2xl'>Page d'admin - Bienvenue {session.user.email}</h2>
-        ) : (
-          <h2 className='text-2xl'>Veuillez vous connecter pour voir la page d'administration</h2>  
-        )
-      }
-      
+    <div className='m-4 h-[100%] border-t py-4'>
+      <Table>
+      <TableCaption></TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-[200px]">Services</TableHead>
+          <TableHead>Catégories</TableHead>
+          <TableHead>Prestataires</TableHead>
+          <TableHead>Prix</TableHead>
+          <TableHead>Date</TableHead>
+          <TableHead className='text-right'>Action</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {res?.filter((curDate: any) => {
+            return curDate?.userEmail === data?.user?.email
+            })?.map((item: any) => (
+          <TableRow key={item.id}>
+            <TableCell className="font-medium">{item.service.name_service}</TableCell>
+            <TableCell>{item.prestataire.categorySlug}</TableCell>
+            <TableCell>{item.prestataire.name}</TableCell>
+            <TableCell>{item.service.price}.00 $</TableCell>
+            <TableCell>{item.date_reservation}</TableCell>
+            <TableCell className='text-right'><Action /></TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+      <Bienvenue res={res} />
     </div>
   )
 }

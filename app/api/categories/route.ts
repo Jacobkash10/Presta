@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 export async function POST(req: Request) {
       try {
       const body = await req.json()
-      const {name_cate, image } = body
+      const {slug, name_cate, image } = body
 
       const existingName = await db?.category.findFirst({where: {name_cate}})
       if (existingName) {
@@ -13,6 +13,7 @@ export async function POST(req: Request) {
 
       const createCate = await db?.category.create({
             data: {
+                  slug,
                   name_cate,
                   image
             }

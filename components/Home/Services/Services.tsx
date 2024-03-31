@@ -26,7 +26,7 @@ const Services = async () => {
                 services?.slice(0, 6)?.map((item: any) => (
                     <div className="" key={item.id}>
                         <div className="border border-input bg-secondary w-[100%] h-[10rem] sm:h-[10rem] nine:h-[13rem] rounded-lg  overflow-hidden">
-                            <Link href={`/Service/${item.id}`}>
+                            <Link href={`/Service/${item.slug}`}>
                                 <Image src={item.image} alt='Car' width={0} height={0} sizes='100vw' className='w-[100%] h-[100%] object-contain rounded-lg hover:scale-125 transition-all .5s ease-in-out'  />
                             </Link>
                         </div>

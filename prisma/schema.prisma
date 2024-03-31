@@ -34,70 +34,99 @@ model User {
   emailVerified  DateTime?
   image          String?
   hashedPassword String?
+  address        String?
+  phone          String?
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 
   accounts     Account[]
   reservations Reservation[]
+  comment      Comment[]
 }
 
 model Service {
   id           String @id @default(cuid()) @map("_id")
+  slug         String @unique
   name_service String
   description  String
   price        Float
 
-  prestataireId String?
-  prestataire   Provider? @relation(fields: [prestataireId], references: [id], onDelete: Cascade)
+  categorySlug String?
+  category     Category? @relation(fields: [categorySlug], references: [slug], onDelete: Cascade)
 
-  categoryId String?
-  category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-
+  provider     Provider[]
   reservations Reservation[]
 }
 
 model Category {
   id        String @id @default(cuid()) @map("_id")
+  slug      String @unique
   name_cate String
   image     String
 
-  service Service[]
+  prestataire Provider[]
+  service     Service[]
 }
 
 model Provider {
   id          String  @id @default(cuid()) @map("_id")
+  slug        String  @unique
   name        String
   description String
   address     String
   email       String
+  password    String?
   tel         String
-  note        Int
+  note        Int?
+  image       String?
   status      String?
+  diplome     String?
+  language    String?
+  exp         String?
+  commitment  String?
 
-  services  Service[]
-  calendars Calendar[]
+  categorySlug String?
+  category     Category? @relation(fields: [categorySlug], references: [slug], onDelete: Cascade)
+
+  serviceSlug String?
+  service     Service? @relation(fields: [serviceSlug], references: [slug], onDelete: Cascade)
+
+  calendars   Calendar[]
+  reservation Reservation[]
+  comments    Comment[]
 }
 
 model Calendar {
   id         String   @id @default(cuid()) @map("_id")
+  slug       String   @unique
   date_dispo DateTime
   time_slot  DateTime
 
-  prestataireId String?
-  prestataire   Provider? @relation(fields: [prestataireId], references: [id], onDelete: Cascade)
+  prestataireSlug String?
+  prestataire     Provider? @relation(fields: [prestataireSlug], references: [slug], onDelete: Cascade)
 }
 
 model Reservation {
   id               String   @id @default(cuid()) @map("_id")
+  slug             String?  @unique
+  special          String?
   date_reservation DateTime
+  hour             DateTime
+  address          String
+  tel              String
+  description      String?
 
-  userId String?
-  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userEmail String?
+  user      User?   @relation(fields: [userEmail], references: [email], onDelete: Cascade)
 
-  serviceId String?
-  service   Service? @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  prestataireSlug String?
+  prestataire     Provider? @relation(fields: [prestataireSlug], references: [slug], onDelete: Cascade)
 
-  comments Comment[]
+  serviceSlug String?
+  service     Service? @relation(fields: [serviceSlug], references: [slug], onDelete: Cascade)
+
+  comments  Comment[]
+  createdAt DateTime  @default(now())
 }
 
 model Comment {
@@ -107,12 +136,19 @@ model Comment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  reservationId String?
-  reservation   Reservation? @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+  userEmail String?
+  user      User?   @relation(fields: [userEmail], references: [email], onDelete: Cascade)
+
+  reservationSlug String?
+  reservation     Reservation? @relation(fields: [reservationSlug], references: [slug], onDelete: Cascade)
+
+  prestataireSlug String?
+  prestataire     Provider? @relation(fields: [prestataireSlug], references: [slug], onDelete: Cascade)
 }
 
 model Post {
   id        String   @id @default(cuid())
+  slug      String   @unique
   title     String   @db.VarChar(255)
   createdAt DateTime @default(now()) @db.Timestamp(6)
   content   String?

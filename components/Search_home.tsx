@@ -27,7 +27,7 @@ export async function SearchHome() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-      <div className='flex items-center justify-center gap-2 border border-input bg-[#0000002b] py-2 pl-5 pr-2 mb-8 rounded-full w-[90%] xs:w-[70%] sm:w-[50%] md:w-[52%] nine:w-[40%] cursor-pointer transition-all .3s hover:bg-[#6b676739]'>
+        <div className='flex items-center justify-center gap-2 border border-input bg-[#0000002b] py-2 pl-5 pr-2 mb-8 rounded-full w-[90%] xs:w-[70%] sm:w-[50%] md:w-[52%] nine:w-[40%] cursor-pointer transition-all .3s hover:bg-[#6b676739]'>
             <span className="w-[90%] text-[grey] text-sm md:sm nine:base">Rechercher un service</span>
             <i className='bg-green-700 h-[100%] p-2 rounded-3xl'><Search color='white' size={25} /></i>
         </div>
@@ -46,9 +46,9 @@ export async function SearchHome() {
             <p className="mb-2 text-xs">Nos services</p>
             {
                   services?.slice(0, 6)?.map((item: any) => (
-                        <div className="py-2 px-2 hover:bg-[#aaa49762] bg-secondary transition-none .3s flex items-center gap-3" key={item.id}>
+                        <div className="py-2 px-2 bg-secondary hover:bg-[#a5a3a3a3] transition-none .3s flex items-center gap-3" key={item.id}>
                               <i><ArrowBigRight className="text-primary" /></i>
-                              <Link className="text-primary w-full" href={"/UnService"}>
+                              <Link className="text-primary w-full" href={`/Service/${item.slug}`}>
                                     {item.name_cate}
                               </Link>
                         </div>

@@ -11,12 +11,12 @@ export async function generateStaticParams() {
       const data = await res.json();
      
       return data.categories.map((category: any) => ({
-        id: category.id.toString(),
+        id: category.slug.toString(),
       }))
     }
 
-    async function fetchCategories(id: string) {
-      const res = await fetch(`http://localhost:3000/api/categories/${id}`, {
+    async function fetchCategories(slug: string) {
+      const res = await fetch(`http://localhost:3000/api/categories/${slug}`, {
         next: {
           revalidate: 10,
         }
@@ -25,9 +25,9 @@ export async function generateStaticParams() {
       return data
     }
 
-const page = async ({ params }: { params: { id: string } }) => {
+const page = async ({ params }: { params: { slug: string } }) => {
 
-  const services = await fetchCategories(params.id)
+  const services = await fetchCategories(params.slug)
 
   return (
     <div className='pt-20'>

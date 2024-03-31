@@ -10,7 +10,7 @@ const Nom = () => {
             <h5 className='mb-2 font-bold text-center'>Montage de meubles</h5>
             <h3 className='mb-3 font-bold text-center text-2xl max-w-md'>Quel est votre nom ?</h3>
             <div className='mt-3 w-[100%] flex flex-col items-center justify-center'>
-                <Input type='text' className='w-[40%] bg-white cursor-pointer hover:bg-slate-200 transition-all .3s' placeholder=''/>
+                <Input type='text' className='w-[40%] py-7 bg-white cursor-pointer hover:bg-slate-200 transition-all .3s' placeholder='Jhon Doe'/>
             </div>
         </div>
     </div>

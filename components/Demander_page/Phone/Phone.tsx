@@ -3,7 +3,7 @@ import { ShieldCheck } from 'lucide-react';
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-const Phone = () => {
+const Phone = ({reservation, setReservation}: any) => {
   return (
     <div className="mt-8 rounded-lg border px-10 py-6 flex flex-col items-center justify-center">
         <h5 className='mb-2 font-bold text-center'>Montage de meubles</h5>
@@ -11,7 +11,7 @@ const Phone = () => {
         <div className='mt-3 w-[100%] flex flex-col items-center justify-center'>
             <div className='flex items-center gap-2 w-[100%] justify-center'>
                 <Select>
-                    <SelectTrigger className="w-[8%]">
+                    <SelectTrigger className="w-[8%] py-7">
                         <SelectValue placeholder="MA" />
                     </SelectTrigger>
                     <SelectContent>
@@ -21,12 +21,16 @@ const Phone = () => {
                         </SelectGroup>
                     </SelectContent>
                 </Select>
-                <Input className='w-[32%] bg-white transition-all .3s' placeholder='06 23 65 87 00'/>
+                <Input 
+                value={reservation.tel}
+                onChange={e => setReservation({ ...reservation, tel: e.target.value })}
+                className='w-[32%] py-7 bg-white transition-all .3s' 
+                placeholder='06 23 65 87 00' required/>
             </div>
         </div>
         <div className='mt-2 border-[.1rem] flex items-start gap-2 p-4 w-[40%] rounded-md'>
             <i><ShieldCheck /></i>
-            <h5 className='max-w-md text-xs'>Ces informations seront transmises uniquement aux prestataires que vous réserverez.</h5>
+            <h5 className='max-w-md text-sm'>Ces informations seront transmises uniquement aux prestataires que vous réserverez.</h5>
         </div>
     </div>
   )

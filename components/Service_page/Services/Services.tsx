@@ -29,9 +29,9 @@ const Services = async () => {
         <div className='sm:grid gap-5 mt-6 w-[100%] block xs:grid-cols-2 nine:grid-cols-3'>
             {
                 services?.map((item: any) => (
-                    <div className="" key={item.id}>
+                    <div className="" key={item.slug}>
                         <div className="border border-input bg-secondary w-[100%] h-[13rem] rounded-lg  overflow-hidden">
-                            <Link href={`/Service/${item.id}`}>
+                            <Link href={`/Service/${item.slug}`}>
                                 <Image src={item.image} alt='Car' width={0} height={0} sizes='100vw' className='w-[100%] h-[100%] object-contain rounded-lg hover:scale-125 transition-all .5s ease-in-out'  />
                             </Link>
                         </div>

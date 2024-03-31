@@ -3,7 +3,6 @@
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from "@/components/ui/textarea"
-import React from 'react'
 
 const Precision = () => {
   return (
@@ -16,14 +15,14 @@ const Precision = () => {
                     <Label>Titre de la demande</Label>
                     <h5 className='text-sm'>23/80</h5>
                 </div>
-                <Input className='w-[40%] bg-white transition-all .3s' placeholder='' value="Montage de meubles"/>
+                <Input className='w-[40%] py-7 bg-white transition-all .3s' placeholder='' value="Montage de meubles"/>
             </div>
             <div className='w-[100%] flex flex-col justify-center items-center mt-7'>
                 <div className='flex justify-between w-[40%] items-center mb-2'>
                     <Label>Détails supplémentaires</Label>
                     <h5 className='text-sm'>(optionnel)</h5>
                 </div>
-                <Textarea placeholder="Type your message here." className='w-[40%] min-h-[140px]' />
+                <Textarea placeholder="Tapez votre message ici" className='w-[40%] min-h-[140px]' />
             </div>
         </div>
     </div>
