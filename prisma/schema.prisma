@@ -47,7 +47,7 @@ model User {
 model Service {
   id           String @id @default(cuid()) @map("_id")
   slug         String @unique
-  name_service String
+  name_service String @unique
   description  String
   price        Float
 
@@ -108,10 +108,9 @@ model Calendar {
 
 model Reservation {
   id               String   @id @default(cuid()) @map("_id")
-  slug             String?  @unique
   special          String?
   date_reservation DateTime
-  hour             DateTime
+  hour             String
   address          String
   tel              String
   description      String?
@@ -122,11 +121,12 @@ model Reservation {
   prestataireSlug String?
   prestataire     Provider? @relation(fields: [prestataireSlug], references: [slug], onDelete: Cascade)
 
-  serviceSlug String?
-  service     Service? @relation(fields: [serviceSlug], references: [slug], onDelete: Cascade)
+  serviceName String
+  service     Service @relation(fields: [serviceName], references: [name_service], onDelete: Cascade)
 
   comments  Comment[]
   createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Comment {
@@ -139,8 +139,8 @@ model Comment {
   userEmail String?
   user      User?   @relation(fields: [userEmail], references: [email], onDelete: Cascade)
 
-  reservationSlug String?
-  reservation     Reservation? @relation(fields: [reservationSlug], references: [slug], onDelete: Cascade)
+  reservationName String?
+  reservation     Reservation? @relation(fields: [reservationName], references: [id], onDelete: Cascade)
 
   prestataireSlug String?
   prestataire     Provider? @relation(fields: [prestataireSlug], references: [slug], onDelete: Cascade)

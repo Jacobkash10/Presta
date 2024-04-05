@@ -1,7 +1,15 @@
 'use client'
 
-
 import axios from "axios"
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+  } from "@/components/ui/form"
 import { useState } from "react"
 import Image from 'next/image'
 import React from 'react'
@@ -11,6 +19,12 @@ import { Button } from '@/components/ui/button'
 import { useRouter } from "next/navigation";
 import { useToast } from '@/components/ui/use-toast';
 import Link from 'next/link'
+import {z} from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from "@hookform/resolvers/zod"
+import { registerSchema } from "./validators/register"
+
+type Input = z.infer<typeof registerSchema>;
 
 const Inscription = () => {
 
@@ -18,58 +32,53 @@ const Inscription = () => {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const [error, setError] = useState("");
-    const [user, setUser] = useState({
-            name: '',
-            email: '',
-            password: ''
+
+        const form = useForm<Input>({
+            resolver: zodResolver(registerSchema),
+            defaultValues: {
+                  confirmPassword: "",
+                  email: "",
+                  name: "",
+                  password: "",
+            }
         })
-    
-        const registerUser = async (e: React.FormEvent<HTMLFormElement>) => {
-          e.preventDefault()
-          setLoading(true);
-          try {
-            if (!user.name || !user.email || !user.password) {
-                setError("Veuillez remplir tous les champs");
-                return;
-              }
-            
-            const emailRegex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
-            if (!emailRegex.test(user.email)) {
-                setError("Email invalide");
-                return;
-            }
 
-            const res = await axios.post('/api/register', user)
-            console.log(res.data);
-            if (res.status == 200 || res.status == 201) {
-                // toast.success("Utilisateur ajouté avec succès");
+        async function onSubmit(data: Input) {
+            setLoading(true);
+            try {
+                const res = await axios.post('/api/register', data)
+                // if (data.email) {
+                //     toast({
+                //           title: "Cet email existe déjà",
+                //           variant: 'destructive'
+                //     })
+                //     return;
+                // }
+                if (res.status == 200 || res.status == 201) {
+                    toast({
+                        title: "Success",
+                        description: "Utilisateur ajouté avec succès",
+                        variant: "default"
+                      }) 
+                    setError("");
+                    router.push("/Connexion");
+                }
+                
+              } catch (error) {
+                console.log(error);
                 toast({
-                    title: "Success",
-                    description: "Utilisateur ajouté avec succès",
-                    variant: "default"
-                  })
-                setError("");
-                router.push("/Connexion");
-            }
-            
-          } catch (error) {
-            console.log(error);
-            toast({
-                title: "Error",
-                description: "",
-                variant: "destructive"
-            });
-          }
-          finally {
-            setLoading(false);
-
-            setUser({
-              name: "",
-              email: "",
-              password: "",
-            });
-          }
+                    title: "Error",
+                    description: "",
+                    variant: "destructive"
+                });
+              }
+              finally {
+                setLoading(false);
+    
+                data
+              }
         }
+
 
   return (
     <div className='md:flex justify-between'>
@@ -80,43 +89,71 @@ const Inscription = () => {
             </div>
         </div>
         <div className='md:m-auto sm:px-[4rem] md:px-[3rem] nine:px-[5rem] w-full sm:w-[100%] lg:w-[50%]'>
-            <form className='border-[1px] py-10 px-[2rem] rounded-lg' onSubmit={registerUser}>
+        <Form {...form}>
+            <form className='border-[1px] py-10 px-[2rem] rounded-lg' onSubmit={form.handleSubmit(onSubmit)}>
                 <div className="">
-                    <Label htmlFor="text">Non d'utilisateur</Label>
-                    <Input
-                        id="name"
-                        name="name"
-                        type="text"
-                        required
-                        value={user.name}
-                        onChange={e => setUser({ ...user, name: e.target.value })}
-                        placeholder="Jhon Doe" className='w-[100%] py-6' 
+                    {/* name */}
+                    <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                        <FormItem>
+                        <FormLabel>Non d'utilisateur</FormLabel>
+                        <FormControl>
+                            <Input placeholder="Jhon Doe" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )}
                     />
                 </div>
                 <div className="mt-5">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        autoComplete="email"
-                        required
-                        value={user.email}
-                        onChange={e => setUser({ ...user, email: e.target.value })}
-                        placeholder="example@gmail.com" className='w-[100%] py-6' 
+                    {/* email */}
+                    <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                        <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                            <Input placeholder="example@gmail.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )}
                     />
                 </div>
                 <div className="mt-5">
-                    <Label htmlFor="password">Mot de passe</Label>
-                    <Input
-                        id="password"
-                        name="password"
-                        type="password"
-                        autoComplete="current-password"
-                        required
-                        value={user.password}
-                        onChange={e => setUser({ ...user, password: e.target.value })}
-                        className='w-[100%] py-6' 
+                    {/* <Label htmlFor=
+                    {/* password */}
+                    <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                        <FormItem>
+                        <FormLabel>Mot de passe</FormLabel>
+                        <FormControl>
+                            <Input placeholder="" {...field} type='password' />
+                        </FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )}
+                    />
+                </div>
+                <div className="mt-5">
+                    {/* confirm password */}
+                    <FormField
+                    control={form.control}
+                    name="confirmPassword"
+                    render={({ field }) => (
+                        <FormItem>
+                        <FormLabel>Confirm password</FormLabel>
+                        <FormControl>
+                            <Input placeholder="Confirm your password" {...field} type='password' />
+                        </FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )}
                     />
                 </div>
                 <div className='mt-5'>
@@ -130,6 +167,7 @@ const Inscription = () => {
                     <Link className='text-green-500 hover:underline max-w-fit' href='/Connexion'>Connectez-vous</Link>
                 </div>
             </form>
+        </Form>
         </div>
     </div>
   )

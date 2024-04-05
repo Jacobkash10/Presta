@@ -13,7 +13,7 @@ const Hour_picker = ({reservation, setReservation}: any) => {
           required
           value={reservation.hour}
           onChange={e => setReservation({ ...reservation, hour: e.target.value })}
-          type='time' className='w-[40%] py-7' />
+          type='text' className='w-[40%] py-7' />
         </div>
     </div>
   )

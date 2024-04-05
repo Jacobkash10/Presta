@@ -35,7 +35,7 @@ const Edit = ({session}: any) => {
             </Label>
             <Input
               id="name"
-              defaultValue={session.user.name}
+              defaultValue={session?.user?.name}
               className="col-span-3"
             />
           </div>
@@ -45,7 +45,7 @@ const Edit = ({session}: any) => {
             </Label>
             <Input
               id="email"
-              defaultValue={session.user.email}
+              defaultValue={session?.user?.email}
               className="col-span-3"
             />
           </div>

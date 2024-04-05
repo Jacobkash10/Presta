@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import Provider from "@/context/AuthContex";
 import Footer from "@/components/Footer/Footer";
@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Outfit({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Presta",

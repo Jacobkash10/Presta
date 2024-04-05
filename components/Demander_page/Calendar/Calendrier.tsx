@@ -31,7 +31,7 @@ const Calendrier = ({reservation, setReservation}: any) => {
           required
           value={reservation.date_reservation}
           onChange={e => setReservation({ ...reservation, date_reservation: e.target.value })}
-          type='datetime-local' className='w-[40%] py-7' />
+          type='text' className='w-[40%] py-7' />
         </div>
     </div>
   )

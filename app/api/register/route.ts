@@ -1,13 +1,24 @@
 import { db } from '@/lib/db';
 import bcrypt from 'bcrypt'
 import { NextResponse } from 'next/server'
+import * as z from 'zod';
+
+const userSchema = z
+  .object({
+    name: z.string().min(1, 'Username is required').max(100),
+    email: z.string().min(1, 'Email is required').email('Invalid email'),
+    password: z
+      .string()
+      .min(1, 'Password is required')
+      .min(8, 'Password must have than 8 characters'),
+  });
 
 export async function POST(req: Request){
     const body = await req.json();
-    const { name, email, password } = body;
+    const { name, email, password } = userSchema.parse(body);
 
     if(!name || !email || !password) {
-        return new NextResponse('Missing Fields', { status: 400 })
+        return new NextResponse('Champs manquants', { status: 400 })
     }
 
     const exist = await db.user.findUnique({
@@ -17,7 +28,7 @@ export async function POST(req: Request){
     });
 
     if(exist) {
-        throw new Error('Email already exists')
+        throw new Error("L'email existe déjà")
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);

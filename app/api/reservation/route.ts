@@ -11,20 +11,21 @@ export async function POST(req: Request) {
   
       try {
       const body = await req.json()
-      const { slug, date_reservation, hour, address, tel } = body
+      const { serviceName, date_reservation, hour, address, tel, description } = body
 
-      const createReservation = await db?.reservation.create({
+      const reservation = await db?.reservation.create({
             data: {
-                  slug,
+                  serviceName,
                   date_reservation,
                   hour,
                   address,
                   tel,
+                  description,
                   userEmail: session.user?.email
             }
       })
 
-      return NextResponse.json({reservation: createReservation, message: "Réservation faite"}, {status: 201})
+      return NextResponse.json({reservation: reservation, message: "Réservation faite"}, {status: 201})
       }
 
       catch (error) {

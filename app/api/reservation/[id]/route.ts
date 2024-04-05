@@ -3,8 +3,8 @@ import { NextResponse } from 'next/server'
 
 export async function GET(req: Request) {
       try {
-            const slug = req.url.split("/reservation/")[1]
-            const reserve = await db.reservation.findFirst({ where: { slug }, include: { user: true} })
+            const id = req.url.split("/reservation/")[1]
+            const reserve = await db.reservation.findFirst({ where: { id }, include: { user: true} })
             if (!reserve) {
                   return NextResponse.json({ message: "Introuvable" }, { status: 404 })
               }

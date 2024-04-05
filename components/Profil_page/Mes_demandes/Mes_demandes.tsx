@@ -13,11 +13,12 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import Action from './Action';
+import { format } from 'date-fns';
 
 
 const MesDemandes = async ({res}: any) => {
 
-  const data = await getServerSession(authOptions);
+  const data = await getServerSession(authOptions)
   console.log(res)
 
   return (
@@ -39,11 +40,11 @@ const MesDemandes = async ({res}: any) => {
             return curDate?.userEmail === data?.user?.email
             })?.map((item: any) => (
           <TableRow key={item.id}>
-            <TableCell className="font-medium">{item.service.name_service}</TableCell>
-            <TableCell>{item.prestataire.categorySlug}</TableCell>
-            <TableCell>{item.prestataire.name}</TableCell>
-            <TableCell>{item.service.price}.00 $</TableCell>
-            <TableCell>{item.date_reservation}</TableCell>
+            <TableCell className="font-medium">{item?.service?.name_service}</TableCell>
+            <TableCell>{item?.prestataire?.categorySlug}</TableCell>
+            <TableCell>{item?.prestataire?.name}</TableCell>
+            <TableCell>{item?.service?.price}.00 $</TableCell>
+            <TableCell>{format(item?.date_reservation, 'd LLLL, yyyy')}</TableCell>
             <TableCell className='text-right'><Action /></TableCell>
           </TableRow>
         ))}

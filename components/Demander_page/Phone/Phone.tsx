@@ -21,10 +21,11 @@ const Phone = ({reservation, setReservation}: any) => {
                         </SelectGroup>
                     </SelectContent>
                 </Select>
-                <Input 
+                <Input
+                type='text' 
                 value={reservation.tel}
                 onChange={e => setReservation({ ...reservation, tel: e.target.value })}
-                className='w-[32%] py-7 bg-white transition-all .3s' 
+                className='w-[32%] text-background py-7 bg-white transition-all .3s' 
                 placeholder='06 23 65 87 00' required/>
             </div>
         </div>

@@ -9,7 +9,7 @@ const Services = ({reservation, setReservation}: any ) => {
 
     const [allServices, setAllServices] = useState([])
     const res = allServices
-    console.log(res)
+    
 
     useEffect(() => {
         async function fetchServices() {
@@ -33,14 +33,20 @@ const Services = ({reservation, setReservation}: any ) => {
             <Input type="text" className='bg-transparent w-[100%] border-none text-primary transition-all .3s' placeholder='Rechercher un service' />
         </div> */}
         <div className='mt-5 w-full flex flex-col items-center justify-center'>
-            <select required className='border bg-background rounded-lg py-4 w-[40%]' onChange={e => setReservation({ ...reservation, serviceSlug: e.target.value })}>
+            {/* <select required className='border bg-background rounded-lg py-4 w-[40%]' onChange={e => setReservation({ ...reservation, serviceSlug: e.target.value })}>
                 <option value={reservation.serviceSlug}>Service</option>
                 {
                     res?.map((item: any) => (
                         <option key={item.id} value={item.slug}>{item?.name_service}</option>
                     ))
                 }
-            </select>
+            </select> */}
+            <Input
+          name="slug"
+          required
+          value={reservation.slug}
+          onChange={e => setReservation({ ...reservation, slug: e.target.value })}
+          type='text' className='w-[40%] py-7' />
         </div>
         {/* <div className="grid grid-cols-3 grid-rows-2 w-[50%] gap-2 mt-5">
             <Button variant='secondary' className='py-3 px-5 rounded-ful hover:bg-green-500 transition-all .4s'>
