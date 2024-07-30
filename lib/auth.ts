@@ -5,6 +5,8 @@ import GoogleProvider from "next-auth/providers/google";
 import bcrypt from 'bcrypt'
 import { NextAuthOptions, getServerSession } from "next-auth";
 import { db } from "./db";
+import { UserRole } from "@prisma/client"
+import { getUserById } from "@/data/user"
 
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(db),
@@ -35,12 +37,12 @@ export const authOptions: NextAuthOptions = {
                 });
 
                 // if no user was found 
-                if (!user || !user?.hashedPassword) {
+                if (!user || !user?.password) {
                     throw new Error('No user found')
                 }
 
                 // check to see if password matches
-                const passwordMatch = await bcrypt.compare(credentials.password, user.hashedPassword)
+                const passwordMatch = await bcrypt.compare(credentials.password, user.password)
 
                 // if password does not match
                 if (!passwordMatch) {
@@ -51,11 +53,33 @@ export const authOptions: NextAuthOptions = {
             },
         }),  
     ],
-    secret: process.env.SECRET,
+      callbacks: {
+            async session({token, session}) {
+                  if (token.sub && session.user) {
+                        session.user.id = token.sub
+                  }
+
+                  if (token.role && session.user) {
+                        session.user.role = token.role as UserRole
+                  }
+                  return session
+            },
+            async jwt({token}) {
+                  if (!token.sub) return token
+
+                  const existingUser = await getUserById(token.sub)
+
+                  if (!existingUser) return token
+
+                  token.role = existingUser.role
+
+                  return token
+            }
+      },
+    secret: process.env.AUTH_SECRET,
     session: {
         strategy: "jwt",
     },
-    debug: process.env.NODE_ENV === "development",
 }
 
 const handler = NextAuth(authOptions)

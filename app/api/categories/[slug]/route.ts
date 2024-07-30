@@ -4,7 +4,10 @@ import { NextResponse } from 'next/server'
 export async function GET(req: Request, ) {
       try {
             const slug = req.url.split("/categories/")[1]
-            const category = await db.category.findFirst({ where: { slug } })
+            const category = await db.category.findFirst({ 
+                  where: 
+                  { slug }
+            })
             if (!category) {
                   return NextResponse.json({ message: "Introuvable" }, { status: 404 })
               }

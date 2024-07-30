@@ -4,7 +4,7 @@ import React from 'react'
 
 const Blog = () => {
   return (
-    <div className='mt-28 flex flex-col xs:items-center justify-center'>
+    <div className='mt-28 flex flex-col items-center justify-center'>
         <h3 className='text-xl nine:text-2xl lg:text-3xl font-bold mb-2'>Besoin de <span className='text-green-600'>conseils ?</span></h3>
         <div className="block xs:grid md:grid-cols-2 nine:grid-cols-3 gap-8 w-[100%] mt-10">
             <div className="w-[100%]">

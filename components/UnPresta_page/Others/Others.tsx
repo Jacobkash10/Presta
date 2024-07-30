@@ -1,25 +1,32 @@
 import { Button } from '@/components/ui/button'
+import { db } from '@/lib/db'
 import { Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-export async function fetchPrestataires() {
-      const res = await fetch('http://localhost:3000/api/prestataires', {
-          next: {
-              revalidate: 10
-          }
-      })
-  
-      const data = await res.json()
-      return data
+interface Provider {
+      id: string;
+      slug: string;
+      name: string;
+      description: string;
+      address: string;
+      email: string;
   }
+  
+  interface Props {
+      provider: Provider;
+    }
 
-const Others = async ({providers}: any) => {
+const Others: React.FC<Props> = async ({provider}) => {
 
-      const allPrestataires = await fetchPrestataires()
+      const prestataires = await db.provider.findMany({
+            include: {
+                  category: true
+            }
+      })
 
-      const res = allPrestataires.providers
+      const res = prestataires
 
   return (
     <div className='mt-28'>

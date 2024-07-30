@@ -27,7 +27,7 @@ const Services = async () => {
     <div className='mt-5 flex sm:items-center justify-center flex-col w-[100%]'>
         <h3 className='text-xl sm:text-2xl lg:text-3xl font-bold mb-1 xs:text-center'>Tous nos <span className='text-green-600'>services</span></h3>
         <div className='sm:grid gap-5 mt-6 w-[100%] block xs:grid-cols-2 nine:grid-cols-3'>
-            {
+            { services.length > 0 ?
                 services?.map((item: any) => (
                     <div className="" key={item.slug}>
                         <div className="border border-input bg-secondary w-[100%] h-[13rem] rounded-lg  overflow-hidden">
@@ -39,6 +39,11 @@ const Services = async () => {
                             <h5 className='font-semibold text-sm'>{item.name_cate}</h5>
                         </div>
                     </div>
+                ))
+                :
+
+                [1,2,3,4,5,6,7,8,9].map((item, index) => (
+                  <div key={index} className='h-[13rem] w-full bg-slate-200 animate-pulse rounded-lg'></div>
                 ))
             }
         </div>  

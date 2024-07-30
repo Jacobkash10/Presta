@@ -26,8 +26,8 @@ const Sidebar = ({user}: any) => {
     <div className='flex flex-col gap-3 items-start justify-between p-6 w-[30%] border-x h-[50%]'>
       <div className='flex flex-col gap-3 items-start w-full'>
         {
-              links.map((item: any) => (
-                <div key={item.name} className={`${isActive(item.link) ? 'bg-secondary rounded-lg' : ''} flex items-center gap-5 text-base p-2 hover:bg-secondary rounded-lg ease-in duration-200 w-full`}>
+              links.map((item, index) => (
+                <div key={index} className={`${isActive(item.link) ? 'bg-secondary rounded-lg' : ''} flex items-center gap-5 text-base p-2 hover:bg-secondary rounded-lg ease-in duration-200 w-full`}>
                   <i>{item.i}</i>
                   <Link className='w-full' href={item.link} key={item.name}>{item.name}</Link>
                 </div>

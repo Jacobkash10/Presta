@@ -22,10 +22,7 @@ const Banner = () => {
             <div className='flex flex-col justify-center items-center'>
                 <h1 className='text-2xl sm:text-[2rem] lg:text-5xl max-w-sm md:max-w-3xl nine:max-w-lg lg:max-w-3xl text-center mb-4 font-bold'>Trouver <span className='text-green-600'>un prestataire idéal</span> pour vos besoins</h1>
                 <p className='text-sm sm:text-base font-normal mb-4 max-w-xl text-center'>Déménageur, bricoleur, peintre, réparateur, électricien, plombier... trouvez un prestataire qualifié pour tous vos besoins !</p>
-                <Button variant='default' className='bg-green-600 hover:bg-green-700 text-white py-7'><Link href='/' className='flex items-center gap-2'>
-                    Demander un prestataire <i><CornerUpRight /></i>
-                    </Link>
-                </Button>
+                
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { AlignRight, PlusCircle, X } from 'lucide-react';
 import UserAccount from '../Connexion_page/UserAccount/UserAccount'
 import { usePathname } from 'next/navigation'
+import Demander from '../Demander/Demander'
 
 
 const Navbar =  () => {
@@ -30,8 +31,10 @@ const Navbar =  () => {
   }
 
   return (
-    <div className='bg-background fixed right-0 left-0 top-0 flex justify-between gap-6 items-center nine:py-[8px] py-[12px] border-b-[1px] px-2 xs:px-[1rem] z-50 bg-default lg:px-[3.8rem] md:px-[1.5rem] nine:px-[2.3rem]'>
-        <div className='border rounded-md p-1'>
+    <div className='bg-background fixed right-0 left-0 top-0 flex justify-between gap-6 items-center nine:py-[10px] 
+    py-[12px] border-b-[1px] px-2 xs:px-[1rem] z-50 bg-default lg:px-[3.8rem] md:px-[1.5rem] nine:px-[2.3rem] 
+    2xl:px-[14rem] 3xl:px-[18%] 4xl:px-[22%]'>
+        <div className='rounded-md p-1'>
           <Link className='text-base font-bold' href={"/"}>
               <span className='border-r-2 border-green-600 mr-1'></span>
               <span className='border-r-2 border-green-600 mr-1'></span>
@@ -42,19 +45,19 @@ const Navbar =  () => {
           <div className='nine:flex nine:items-center nine:gap-6 flex flex-col gap-2 nine:flex-row'>
             {
               links.map((item: any) => (
-                <Link key={item.name} className={`${isActive(item.link) ? 'bg-accent text-accent-foreground' : ''} text-sm font-semibold text-primary px-3 hover:bg-accent hover:text-accent-foreground py-2 rounded-xl transition-all .3s`} href={item.link}>
+                <Link key={item.name} className={`${isActive(item.link) ? 'bg-accent text-accent-foreground' : ''} w-fit text-sm font-semibold text-primary px-3 hover:bg-accent hover:text-accent-foreground py-1.5 rounded-xl transition-all .3s`} href={item.link}>
                   {item.name}
                 </Link>
               ))
             }
           </div>
           <div className='nine:flex nine:items-center nine:gap-3 flex flex-col gap-1 nine:flex-row nine:max-w-full'>
-            <Button variant="outline" className={`${pathname === '/Demander_un_service' ? 'bg-accent text-accent-foreground' : ''} my-3 nine:my-0 max-w-[35%] xs:max-w-[30%] mx-2 nine:mx-0 nine:max-w-full`}>
-              <Link className='nine:flex items-center gap-2' href={"/Demander_un_service"}>
-                <i><PlusCircle size={18} className='hidden nine:flex' /></i>
-                <h5 className='text-xs xs:text-sm'>Demander un service</h5>
-              </Link>
-            </Button>
+            <Demander>
+              <Button variant="outline" className={`${pathname === '/Demander_un_service' ? 'bg-accent text-accent-foreground' : ''} flex items-center gap-2 my-3 nine:my-0 max-w-[35%] xs:max-w-[30%] mx-2 nine:mx-0 nine:max-w-full`}>
+                  <i><PlusCircle size={18} className='hidden nine:flex' /></i>
+                  <h5 className='text-xs xs:text-sm'>Demander un service</h5>
+              </Button>
+            </Demander>
             <ModeToggle />
             <UserAccount />
           </div>

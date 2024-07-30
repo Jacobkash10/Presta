@@ -6,24 +6,17 @@ import { Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Pagination from './Pagination';
-
-export async function fetchPrestataires() {
-    const res = await fetch(`http://localhost:3000/api/prestataires`, {
-        next: {
-            revalidate: 10
-        }
-    })
-
-    const data = await res.json()
-    return data
-}
+import { db } from '@/lib/db';
 
 
 const Prestataires = async () => {
+    const prestataires = await db.provider.findMany({
+        include: {
+            category: true
+        }
+    })
 
-    const allPrestataires = await fetchPrestataires()
-
-    const res = allPrestataires.providers
+    const res = prestataires
     
 
   return (
@@ -33,7 +26,7 @@ const Prestataires = async () => {
             <p className='max-w-lg mb-1 text-sm sm:text-base xs:text-center'>Evaluations, badges qualité, expérience et matériel: vous avez toutes les clés pour faire le bon choix</p>
             <Filtre />
             <div className='grid grid-cols-1 sm:grid-cols-2 nine:grid-cols-3 gap-6 md:gap-10 mt-10 border-b-[1px] pb-10'>
-                {
+                { res.length > 0 ?
                     res?.map((item: any) => (
                     <div className='border-[1px] py-5 px-5 rounded-lg' key={item.id}>
                         <div className='flex flex-col items-center justify-center border-b-[1px] pb-3'>
@@ -70,6 +63,11 @@ const Prestataires = async () => {
                             </Button>
                         </div>
                     </div>
+                    ))
+                    :
+
+                    [1,2,3,4,5,6].map((item, index) => (
+                    <div key={index} className='h-[17rem] w-full bg-slate-200 animate-pulse rounded-lg'></div>
                     ))
                 }
             </div>

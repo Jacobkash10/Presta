@@ -29,12 +29,12 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-          <div className="w-[95%] m-auto box-border font-sans lg:w-[88%] xl:w-[91%] md:w-[94%] nine:w-[93%]">
+          <div className="w-[95%] m-auto box-border font-sans lg:w-[88%] xl:w-[91%] md:w-[94%] nine:w-[93%] 2xl:px-[10rem] 3xl:px-[14%] 4xl:px-[18%]">
             <Toaster />
             <Navbar />
             {children}
+            <Footer />
           </div>
-          <Footer />
           </ThemeProvider>
         </Provider>
         </body>

@@ -8,7 +8,7 @@ import { Linkedin } from 'lucide-react';
 const Footer = () => {
   return (
     <footer className='mt-20 bg-background'>
-      <div className="block sm:grid grid-cols-2 md:grid-cols-4 gap-12 border-t-[1px] px-2 xs:px-[1rem] z-50 bg-default lg:px-[3.8rem] md:px-[1.5rem] nine:px-[2.3rem] py-10">
+      <div className="block sm:grid grid-cols-2 md:grid-cols-4 gap-12 z-50 bg-default py-10">
         <div className="">
           <h1 className='text-md font-semibold mb-3 border rounded-md p-1 max-w-fit'><span className='border-r-2 border-green-600 mr-1'></span>
             <span className='border-r-2 border-green-600 mr-1'></span>Presta

@@ -7,7 +7,7 @@ const Avantage = () => {
   return (
     <div className="mt-28 flex flex-col xs:items-center justify-center">
         <h3 className='text-xl nine:text-2xl lg:text-3xl font-bold mb-2 text-center'><span className='text-green-600'>Les avantages</span><br /> de travailler avec Presta</h3>
-            <div className="w-[100%] block sm:grid grid-cols-3 grid-rows-1 gap-4 mt-6">
+            <div className="w-[100%] block sm:grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-6">
                 <div className="w-[100%] p-[2rem] bg-secondary">
                     <i className='mb-4'><TimerReset size={30} /></i>
                     <h5 className='mb-4 mt-4 text-base font-semibold text-green-600'>Gagnez du temps</h5>

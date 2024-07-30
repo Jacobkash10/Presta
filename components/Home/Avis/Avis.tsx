@@ -26,18 +26,18 @@ const Avis = () => {
     }, [])
 
   return (
-    <div className='mt-28 py-10 rounded-xl flex flex-col xs:items-center justify-center'>
+    <div className='mt-32 py-10 rounded-xl flex flex-col items-center justify-center'>
         <h3 className='text-xl sm:text-2xl lg:text-3xl font-bold mb-2'>Les <span className='text-green-600'>avis</span> des clients</h3>
-        <p className='text-sm sm:text-md max-w-xl mb-2 xs:text-center font-medium'><span className='text-green-600'>La satisfaction de nos utilisateurs</span> est notre priorité. 
-            Vous souhaitez être convaincu <span className='text-green-600'>que Presta</span> est la bonne plateforme ? <br /> 
-            <span className='text-green-600'>Découvrez</span> les avis !
+        <p className='text-sm sm:text-base max-w-xl mb-2 text-center font-medium'>La satisfaction de nos utilisateurs est notre priorité. 
+            Vous souhaitez être convaincu que Presta est la bonne plateforme ? <br /> 
+            Découvrez les avis !
         </p>
-        <div className='border-input w-[80%] rounded-lg flex flex-col xs:items-center justify-center py-5'>
+        <div className='border-input w-[80%] rounded-lg flex flex-col items-center justify-center py-5'>
             <Carousel
                 opts={{
                     align: "start",
                 }}
-                className="w-[100%] mt-10"
+                className="w-[100%] mt-10 px-6"
                 >
                 <CarouselContent>
                     {aviss?.slice(0, 5)?.map((item: any) => (
@@ -64,7 +64,7 @@ const Avis = () => {
                 <CarouselNext />
             </Carousel>
             
-            <Link className='mt-8 underline text-base flex items-center gap-2 hover:text-green-600 transition-all .3s' href={"/Avis"}>
+            <Link className='mt-8 underline text-lg flex items-center gap-2 hover:text-green-600 transition-all .3s' href={"/Avis"}>
                 <h6>Voir d'autres avis</h6><i><ChevronRight size={20} /></i>
             </Link>
         </div>

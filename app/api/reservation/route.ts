@@ -11,11 +11,12 @@ export async function POST(req: Request) {
   
       try {
       const body = await req.json()
-      const { serviceName, date_reservation, hour, address, tel, description } = body
+      const { serviceSlug, slug, date_reservation, hour, address, tel, description } = body
 
       const reservation = await db?.reservation.create({
             data: {
-                  serviceName,
+                  serviceSlug,
+                  slug,
                   date_reservation,
                   hour,
                   address,

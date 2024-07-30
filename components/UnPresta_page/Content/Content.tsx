@@ -4,7 +4,29 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const Content = ({providers}: any) => {
+
+interface Provider {
+      id: string;
+      slug: string;
+      name: string;
+      description: string;
+      address: string;
+      email: string;
+      category: Category | null;
+  }
+
+  interface Category {
+      id: string; 
+      slug: string; 
+      name_cate: string; 
+      image: string;
+}
+  
+  interface Props {
+      provider: Provider;
+    }
+
+const Content: React.FC<Props> = ({provider}) => {
   return (
     <div className='flex items-start gap-28 w-full'>
       <div className='flex flex-col items-center justify-center w-[30%] border rounded-lg p-4'>
@@ -29,11 +51,11 @@ const Content = ({providers}: any) => {
       </div>
       <div className='w-[70%]'>
             <div>
-                  <h2 className='text-3xl font-bold'>{providers?.provider.name}</h2>
+                  <h2 className='text-3xl font-bold'>{provider.name}</h2>
                   <p className='text-sm mt-1'>Membre depuis 2 ans</p>
             </div>
             <div className='mt-6'>
-                  <span className='bg-secondary p-2 max-w-fit'>{providers.provider?.category.name_cate}</span>
+                  <span className='bg-secondary p-2 max-w-fit'>{provider?.category?.name_cate}</span>
                   <p className='mt-2 max-w-xl text-[15px] text-secondary-foreground'>
                         Issu du bâtiment ,bon bricoleur, peinture, tapisserie, assemblage de meubles, pose de cuisines, 
                         électricité, plomberie(sans soudure)

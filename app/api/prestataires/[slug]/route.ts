@@ -12,6 +12,6 @@ export async function GET(req: Request, ) {
       }
 
       catch (error) {
-            return NextResponse.json({ message: "Quelque chose s'est mal passé!" }, { status: 500 })
+            return NextResponse.json({ message: "Quelque chose s'est mal passé!" }, { status: 500 });
       }
 }

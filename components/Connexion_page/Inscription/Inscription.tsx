@@ -1,6 +1,5 @@
 'use client'
 
-import axios from "axios"
 import {
     Form,
     FormControl,
@@ -14,15 +13,16 @@ import { useState } from "react"
 import Image from 'next/image'
 import React from 'react'
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Button } from '@/components/ui/button'
 import { useRouter } from "next/navigation";
 import { useToast } from '@/components/ui/use-toast';
+import { useTransition } from 'react'
 import Link from 'next/link'
 import {z} from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from "@hookform/resolvers/zod"
-import { registerSchema } from "./validators/register"
+import { registerSchema } from '@/schemas'
+import { register } from '@/actions/register'
 
 type Input = z.infer<typeof registerSchema>;
 
@@ -30,39 +30,35 @@ const Inscription = () => {
 
     const {toast} = useToast()
     const [loading, setLoading] = useState(false);
+    const [isPending, startTransition] = useTransition()
     const router = useRouter();
-    const [error, setError] = useState("");
+    const [error, setError] = useState<string | undefined>("");
 
         const form = useForm<Input>({
             resolver: zodResolver(registerSchema),
             defaultValues: {
-                  confirmPassword: "",
                   email: "",
                   name: "",
                   password: "",
+                  confirmPassword: "",
             }
         })
 
-        async function onSubmit(data: Input) {
+        async function onSubmit(values: z.infer<typeof registerSchema>) {
             setLoading(true);
             try {
-                const res = await axios.post('/api/register', data)
-                // if (data.email) {
-                //     toast({
-                //           title: "Cet email existe déjà",
-                //           variant: 'destructive'
-                //     })
-                //     return;
-                // }
-                if (res.status == 200 || res.status == 201) {
-                    toast({
-                        title: "Success",
-                        description: "Utilisateur ajouté avec succès",
-                        variant: "default"
-                      }) 
-                    setError("");
-                    router.push("/Connexion");
-                }
+                startTransition(() => {
+                    register(values)
+                    .then((data) => {
+                          setError(data?.error)
+                          toast({
+                                title: "Success",
+                                description: "Utilisateur enregistré avec succès",
+                                variant: "default"
+                          })
+                          router.push("/Connexion");
+                    })
+              })
                 
               } catch (error) {
                 console.log(error);
@@ -74,8 +70,6 @@ const Inscription = () => {
               }
               finally {
                 setLoading(false);
-    
-                data
               }
         }
 
@@ -100,7 +94,7 @@ const Inscription = () => {
                         <FormItem>
                         <FormLabel>Non d'utilisateur</FormLabel>
                         <FormControl>
-                            <Input placeholder="Jhon Doe" {...field} />
+                            <Input placeholder="Jhon Doe" {...field} disabled={isPending} />
                         </FormControl>
                         <FormMessage />
                         </FormItem>
@@ -116,7 +110,7 @@ const Inscription = () => {
                         <FormItem>
                         <FormLabel>Email</FormLabel>
                         <FormControl>
-                            <Input placeholder="example@gmail.com" {...field} />
+                            <Input placeholder="example@gmail.com" {...field} disabled={isPending}  />
                         </FormControl>
                         <FormMessage />
                         </FormItem>
@@ -133,7 +127,7 @@ const Inscription = () => {
                         <FormItem>
                         <FormLabel>Mot de passe</FormLabel>
                         <FormControl>
-                            <Input placeholder="" {...field} type='password' />
+                            <Input placeholder="" {...field} type='password' disabled={isPending} />
                         </FormControl>
                         <FormMessage />
                         </FormItem>
@@ -149,7 +143,7 @@ const Inscription = () => {
                         <FormItem>
                         <FormLabel>Confirm password</FormLabel>
                         <FormControl>
-                            <Input placeholder="Confirm your password" {...field} type='password' />
+                            <Input placeholder="Confirm your password" {...field} type='password' disabled={isPending} />
                         </FormControl>
                         <FormMessage />
                         </FormItem>

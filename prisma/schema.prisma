@@ -1,47 +1,87 @@
+// datasource db {
+//   provider          = "postgresql"
+//   url               = env("DATABASE_URL")
+//   shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/d/migrate-shadow
+// }
+
 datasource db {
-  provider          = "postgresql"
-  url               = env("DATABASE_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/d/migrate-shadow
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 generator client {
   provider = "prisma-client-js"
 }
 
-model Account {
-  id                String  @id @default(cuid()) @map("_id")
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
+enum UserRole {
+  ADMIN
+  USER
 }
 
 model User {
-  id             String    @id @default(cuid()) @map("_id")
-  name           String?
-  email          String?   @unique
-  emailVerified  DateTime?
-  image          String?
-  hashedPassword String?
-  address        String?
-  phone          String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  address       String?
+  phone         String?
+  role          UserRole  @default(USER)
+  accounts      Account[]
+  sessions      Session[]
 
-  accounts     Account[]
   reservations Reservation[]
   comment      Comment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+  @@map("verification_tokens")
 }
 
 model Service {
@@ -56,6 +96,8 @@ model Service {
 
   provider     Provider[]
   reservations Reservation[]
+
+  @@map("services")
 }
 
 model Category {
@@ -66,6 +108,8 @@ model Category {
 
   prestataire Provider[]
   service     Service[]
+
+  @@map("categories")
 }
 
 model Provider {
@@ -94,6 +138,8 @@ model Provider {
   calendars   Calendar[]
   reservation Reservation[]
   comments    Comment[]
+
+  @@map("providers")
 }
 
 model Calendar {
@@ -104,10 +150,13 @@ model Calendar {
 
   prestataireSlug String?
   prestataire     Provider? @relation(fields: [prestataireSlug], references: [slug], onDelete: Cascade)
+
+  @@map("calendars")
 }
 
 model Reservation {
   id               String   @id @default(cuid()) @map("_id")
+  slug             String   @unique
   special          String?
   date_reservation DateTime
   hour             String
@@ -121,12 +170,14 @@ model Reservation {
   prestataireSlug String?
   prestataire     Provider? @relation(fields: [prestataireSlug], references: [slug], onDelete: Cascade)
 
-  serviceName String
-  service     Service @relation(fields: [serviceName], references: [name_service], onDelete: Cascade)
+  serviceSlug String?
+  service     Service? @relation(fields: [serviceSlug], references: [slug], onDelete: Cascade)
 
   comments  Comment[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+
+  @@map("reservations")
 }
 
 model Comment {
@@ -144,6 +195,8 @@ model Comment {
 
   prestataireSlug String?
   prestataire     Provider? @relation(fields: [prestataireSlug], references: [slug], onDelete: Cascade)
+
+  @@map("comments")
 }
 
 model Post {
@@ -153,4 +206,6 @@ model Post {
   createdAt DateTime @default(now()) @db.Timestamp(6)
   content   String?
   published Boolean  @default(false)
+
+  @@map("posts")
 }
